@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-2-cluster
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nishithmunda/cluster-policy-lab.git
+    targetRevision: HEAD
+    path: clusters/cluster-2
+  destination:
+    server: https://192.168.58.2:8443
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
